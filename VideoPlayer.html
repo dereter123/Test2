@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Наш фільм</title>
+</head>
+<body>
+  <video id="player" width="640" height="360" controls autoplay></video>
+
+  <script>
+    // Перелік файлів частин у порядку відтворення
+    const parts = [
+      'part0.mp4',
+      'part1.mp4',
+      'part2.mp4',
+      'part3.mp4',
+      'part4.mp4',
+      'part5.mp4',
+      'part6.mp4'
+    ];
+
+    const video = document.getElementById('player');
+    let current = 0;
+
+    // Функція завантаження та програвання частини
+    function loadPart(index) {
+      if (index < parts.length) {
+        video.src = parts[index];
+        video.load();
+        video.play();
+      }
+    }
+
+    // При завершенні поточної частини — завантажуємо наступну
+    video.addEventListener('ended', () => {
+      current++;
+      if (current < parts.length) {
+        loadPart(current);
+      }
+    });
+
+    // Старт з першої частини
+    loadPart(0);
+  </script>
+</body>
+</html>
